@@ -1,0 +1,20 @@
+service: open-graph-preview-demo
+org: gjgdserverless
+app: open-graph-preview-demo
+
+package:
+  exclude:
+    - node_modules/**
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: serverless-admin
+
+functions:
+  redirect:
+    handler: handlers.main
+    events:
+      - http:
+          path: /
+          method: get
