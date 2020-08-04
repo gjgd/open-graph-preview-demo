@@ -12,9 +12,9 @@ provider:
   profile: serverless-admin
 
 functions:
-  redirect:
+  main:
     handler: handlers.main
     events:
       - http:
-          path: /
-          method: get
+          path: /{id}
+          method: GET
