@@ -21,8 +21,7 @@ module.exports.main = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Content-Type': 'text/html; charset=UTF-8',
-      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'text/html',
     },
     body: html,
   };
