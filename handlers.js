@@ -1,13 +1,26 @@
+const fetch = require('node-fetch');
+
 module.exports.main = async (event) => {
-  const { id } = event.pathParameters;
+  // const { id } = event.pathParameters;
+  const transactionHash = '0x0b49282cebb60981150cad736b4d24f936cf139385f6022806fd5d90db42afdb';
+  const elementTransactionData = await fetch(
+    `https://element-did.com/api/v1/sidetree/transaction/${transactionHash}/summary`,
+    {
+      method: 'GET',
+    },
+  ).then((res) => res.json());
+  const title = '';
+  const description = '';
+  const siteName = `Sidetree Transaction ${elementTransactionData.transaction.transactionNumber}`;
+  const redirectUrl = `https://element-did.com/server/transactions/${transactionHash}`;
   const html = `
     <html>
       <head>
         <meta charset="UTF-8">
-        <meta property="og:title" content="Sidetree Transaction ${id}"/>
-        <meta property="og:description" content="Ethereum Block: 8392546"/>
-        <meta property="og:site_name" content="Element"/>
-        <meta property="og:image" content="https://raw.githubusercontent.com/transmute-industries/trade.transmute.world/master/packages/trade-app/public/logo512.png?token=AB4MAXP3QXWPS2XPHUOLOQK7GGNRU"/>
+        <meta property="og:title" content="${title}"/>
+        <meta property="og:description" content="${description}"/>
+        <meta property="og:site_name" content="${siteName}"/>
+        <meta property="og:image" content=""/>
       </head>
 
       <body>
@@ -15,7 +28,7 @@ module.exports.main = async (event) => {
       </body>
 
       <script type="text/javascript">
-        window.location.href = "https://element-did.com/server/transactions/0x8ac0dade78b89ec1f83f129c90fda3d0db2bd7dcc39cdac8979bd05002448eb9";
+        window.location.href = "${redirectUrl}";
       </script>
     </html>`;
   return {
