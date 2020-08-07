@@ -1,6 +1,4 @@
 service: open-graph-preview-demo
-org: gjgdserverless
-app: open-graph-preview-demo
 
 provider:
   name: aws
