@@ -2,7 +2,7 @@
 
 ## Install
 
-Install `serverless` (and its alias `sls`) 
+Install `serverless` (and its alias `sls`)
 
 ```bash
 npm i -g serverless
@@ -16,14 +16,11 @@ sls deploy
 
 ## Try it:
 
-Paste this link in Slack:
+https://l3mukrh389.execute-api.us-east-1.amazonaws.com/dev/2
 
-https://out5vxi6m0.execute-api.us-east-1.amazonaws.com/dev/124
+If you paste this link in Slack, it will recognize the user agent and return open graph annotation
 
-It will generate a preview from the Open Graph meta tags, then redirect you to the actual content when you click on the link
-
-
-![Slack preview](./slack-preview.png)
+If you paste this link in a normal browser, it will return a Hello world sentence
 
 ## Links
 
