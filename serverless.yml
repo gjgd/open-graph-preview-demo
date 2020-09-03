@@ -1,8 +1,10 @@
-service: open-graph-preview-demo
 org: gjgdserverless
 app: open-graph-preview-demo
+service: open-graph-preview-demo
 
 provider:
+  logs:
+    restApi: true
   name: aws
   runtime: nodejs12.x
   profile: serverless-admin
