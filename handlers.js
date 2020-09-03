@@ -1,19 +1,11 @@
-const fetch = require('node-fetch');
-
 module.exports.main = async (event) => {
-  const { id } = event.pathParameters;
-  const transactionHash = id;
-  const elementTransactionData = await fetch(
-    `https://element-did.com/api/v1/sidetree/transaction/${transactionHash}/summary`,
-    {
-      method: 'GET',
-    },
-  ).then((res) => res.json());
-  const title = `Element Transaction ${elementTransactionData.transaction.transactionNumber}`;
-  const description = `DID Unique suffixes: ${elementTransactionData.anchorFile.didUniqueSuffixes}`;
-  const siteName = `${transactionHash}`;
-  const redirectUrl = `https://element-did.com/server/transactions/${transactionHash}`;
-  const html = `
+  const userAgent = event.headers['User-Agent'];
+  let html;
+  if (userAgent.includes('Slackbot-LinkExpanding')) {
+    const title = 'Title';
+    const description = 'description';
+    const siteName = 'Site name';
+    html = `
 <html>
   <head>
     <meta charset="UTF-8">
@@ -21,16 +13,17 @@ module.exports.main = async (event) => {
     <meta property="og:description" content="${description}"/>
     <meta property="og:site_name" content="${siteName}"/>
   </head>
-
-  <body>
-    Redirecting to Element...
-  </body>
-
-  <script type="text/javascript">
-    window.location.href = "${redirectUrl}";
-  </script>
 </html>
 `;
+  } else {
+    html = `
+<html>
+  <body>
+    Hello world ${event.pathParameters.id}
+  </body>
+</html>
+`;
+  }
   return {
     statusCode: 200,
     headers: {
